@@ -12,7 +12,9 @@ public class PushCounterPanel extends JPanel {
 
     private int count;
     private JButton push;
+    private JButton reset;
     private JLabel label;
+
 
     //Constructor: Sets up the GUI; initial values.
     public PushCounterPanel()
@@ -21,9 +23,18 @@ public class PushCounterPanel extends JPanel {
         push = new JButton("Push Me!");
         push.addActionListener(new ButtonListener());
 
+
+        reset = new JButton("Reset");
+        reset.addActionListener(new ButtonListener2());
+
+
+
+
+
         label = new JLabel("Pushes: " + count);
         add(push);
         add(label);
+        add(reset);
 
         setBackground(Color.cyan);
         setPreferredSize(new Dimension(300,40));
@@ -36,6 +47,18 @@ public class PushCounterPanel extends JPanel {
         public void actionPerformed(ActionEvent event)
         {
             count++;
+            label.setText("Pushes: " + count);
+
+        }
+
+
+    }
+
+    private class ButtonListener2 implements ActionListener{
+
+        public void actionPerformed(ActionEvent event){
+
+            count = 0;
             label.setText("Pushes: " + count);
         }
 
