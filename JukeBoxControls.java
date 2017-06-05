@@ -7,6 +7,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.applet.AudioClip;
 import java.net.URL;
+import java.util.Random;
 
 
 public class JukeBoxControls extends JPanel {
@@ -50,20 +51,21 @@ public class JukeBoxControls extends JPanel {
 
         //Setting up the buttons
         playButton = new JButton ("Play");
-        playButton.setBackground(Color.darkGray);
-        playButton.setAlignmentY(120);
         JButton stopButton = new JButton("Stop");
+        JButton random = new JButton("Random");
 
         setPreferredSize(new Dimension(240,100));
 
         add(soundsCombo);
         add(playButton);
         add(stopButton);
+        add(random);
 
 
         soundsCombo.addActionListener(new ComboListener());
         stopButton.addActionListener(new ButtonListener());
         playButton.addActionListener(new ButtonListener());
+        random.addActionListener(new RandomButtonListener());
 
         current = null;
 
@@ -94,6 +96,17 @@ public class JukeBoxControls extends JPanel {
 
         }
 
+    }
+
+    private class RandomButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent event)
+        {
+            Random rand = new Random();
+            int n = rand.nextInt(3) + 1;
+            current = sounds[n];
+            current.play();
+
+        }
     }
 
 }
